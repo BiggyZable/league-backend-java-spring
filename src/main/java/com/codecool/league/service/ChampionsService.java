@@ -1,8 +1,10 @@
 package com.codecool.league.service;
 
 import com.codecool.league.dao.repository.ChampionsRepository;
+import com.codecool.league.model.champions.ChampionIdAndKeyModel;
 import com.codecool.league.model.champions.ChampionModel;
 import com.codecool.league.model.champions.ChampionsDataModel;
+import com.codecool.league.model.champions.ChampionsIdAndKeyDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +34,16 @@ public class ChampionsService {
         return getChampionsDataModel(championModels);
     }
 
+    public ChampionsIdAndKeyDataModel getAllChampionIdsAndKeys() {
+        List<ChampionModel> championModels = championsRepository.findAll();
+        List<ChampionIdAndKeyModel> championIdDtos = championModels.stream().map(e -> ChampionIdAndKeyModel.builder()
+                        .id(e.getId())
+                        .key(e.getKey())
+                        .build())
+                .collect(Collectors.toList());
+        return getChampionIdDtoMap(championIdDtos);
+    }
+
     private ChampionsDataModel getChampionsDataModel(List<ChampionModel> championModels) {
         Map<String, ChampionModel> championsMap = championModels
                 .stream()
@@ -45,5 +57,21 @@ public class ChampionsService {
         championsDataModel.setData(championsMap);
 
         return championsDataModel;
+    }
+
+    private ChampionsIdAndKeyDataModel getChampionIdDtoMap(List<ChampionIdAndKeyModel> championIdDtos) {
+        Map<String, ChampionIdAndKeyModel> championsMap = championIdDtos
+                .stream()
+                .collect(Collectors.toMap(
+                        ChampionIdAndKeyModel::getId,
+                        Function.identity(),
+                        (left, right) -> left,
+                        LinkedHashMap::new)
+                );
+
+        var championsIdAndKeyDataModel = new ChampionsIdAndKeyDataModel();
+        championsIdAndKeyDataModel.setData(championsMap);
+
+        return championsIdAndKeyDataModel;
     }
 }
