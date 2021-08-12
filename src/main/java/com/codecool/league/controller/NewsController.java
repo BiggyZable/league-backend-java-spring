@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin()
 @RestController
-@RequestMapping("/news")
+@RequestMapping("/api")
 public class NewsController {
 
     private final NewsService newsService;
@@ -20,7 +20,7 @@ public class NewsController {
     }
 
 
-    @GetMapping("/{pageNumber}")
+    @GetMapping("/news/{pageNumber}")
     public List<NewsModel> getNews(@PathVariable("pageNumber") int pageNumber) {
         return newsService.getNews(pageNumber);
     }

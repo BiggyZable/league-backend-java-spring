@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin()
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 public class FavouriteController {
 
     private final FavouriteService favouriteService;
@@ -21,25 +21,25 @@ public class FavouriteController {
         this.jwtTokenServices = jwtTokenServices;
     }
 
-    @PutMapping("/update-favourite")
+    @PutMapping("/user/update-favourite")
     public Boolean updateUser(@RequestBody String championId, HttpServletRequest req) {
         String username = getUsernameFromRequest(req);
         return favouriteService.updateFavouriteChampions(username, championId);
     }
 
-    @GetMapping("/favourites")
+    @GetMapping("/user/favourites")
     public ChampionsDataModel getFavourites(HttpServletRequest req) {
         String username = getUsernameFromRequest(req);
         return favouriteService.getFavouriteChampionsForUser(username);
     }
 
-    @GetMapping("/champions")
+    @GetMapping("/user/champions")
     public ChampionsDataModel getAllChampionsWithFavouriteField(HttpServletRequest req) {
         String username = getUsernameFromRequest(req);
         return favouriteService.getAllChampionsWithFavouriteField(username);
     }
 
-    @GetMapping("/champions/{tag}")
+    @GetMapping("/user/champions/{tag}")
     public ChampionsDataModel getFilteredChampionsWithFavouriteField(HttpServletRequest req, @PathVariable String tag) {
         String username = getUsernameFromRequest(req);
         return favouriteService.getFilteredChampionsWithFavouriteField(username, tag);

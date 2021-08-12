@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin()
 @RestController
-@RequestMapping("/riot")
+@RequestMapping("/api")
 public class RiotUserController {
 
     private final RiotUserService riotUserService;
@@ -21,17 +21,17 @@ public class RiotUserController {
         this.riotUserService = riotUserService;
     }
 
-    @GetMapping("/{userName}")
+    @GetMapping("/riot/{userName}")
     public RiotUserDetailModel getUserInfo(@PathVariable("userName") String userName) {
         return riotUserService.getUserInfo(userName);
     }
 
-    @GetMapping("/matches")
+    @GetMapping("/riotmatches")
     public List<MatchModel> getMatchHistory() {
         return riotUserService.getMatchHistory();
     }
 
-    @GetMapping("/results")
+    @GetMapping("/riot/results")
     public List<MatchResultModel> getMatchResults() {
         return riotUserService.getMatchDetails();
     }
