@@ -13,6 +13,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: league-app-service
+            name: league-frontend-service
             port:
               number: 80

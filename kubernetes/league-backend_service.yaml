@@ -4,7 +4,7 @@ metadata:
   name: league-backend-service
   namespace: league-app
   labels:
-    app: league-app
+    app: league-backend-app
 spec:
   selector:
     app: league-backend-app
