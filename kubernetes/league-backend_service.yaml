@@ -3,11 +3,10 @@ kind: Service
 metadata:
   name: league-backend-service
   namespace: league-app
-  labels:
-    app: league-backend-app
 spec:
   selector:
-    app: league-backend-app
+    app: league-app
+    tier: backend
   ports:
   - protocol: TCP
     port: 8080

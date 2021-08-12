@@ -3,20 +3,21 @@ kind: Deployment
 metadata:
   name: league-backend-deployment
   namespace: league-app
-  labels:
-    app: league-backend-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: league-backend-app
+      tier: backend
+      app: league-app
   template:
     metadata:
       labels:
-        app: league-backend-app
+        tier: backend
+        app: league-app
     spec:
       containers:
         - name: league-app
           image: 872533758794.dkr.ecr.eu-central-1.amazonaws.com/league-backend
           ports:
-          - containerPort: 8080
+            - containerPort: 8080
+              name: http
