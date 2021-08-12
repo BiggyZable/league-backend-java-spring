@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: league-backend-deployment
+  namespace: league-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: league-app
+  template:
+    metadata:
+      labels:
+        app: league-app
+    spec:
+      containers:
+        - name: league-app
+          image: 
+          ports:
+          - containerPort: 80

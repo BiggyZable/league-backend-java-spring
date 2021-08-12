@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: league-backend-service
+  namespace: league-app
+  labels:
+    app: league-app
+spec:
+  selector:
+    app: league-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http
