@@ -1,4 +1,5 @@
 .idea
 userData.json
-
+target
+target/*
 ./target/*
